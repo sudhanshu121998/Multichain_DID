@@ -1,0 +1,21 @@
+{
+  "name": "did_connect",
+  "version": "1.0.0",
+  "description": "It is used to connect DIDs to multiple Solana accounts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ceramicnetwork/3id-did-resolver": "^1.4.16",
+    "@ceramicnetwork/http-client": "^1.5.8-rc.0",
+    "@ceramicnetwork/stream-tile": "^1.5.7",
+    "@ceramicstudio/idx": "^0.12.2",
+    "@solana/web3.js": "^1.36.0",
+    "dids": "^2.4.3",
+    "key-did-provider-ed25519": "^1.1.0",
+    "key-did-resolver": "^1.4.4"
+  }
+}
