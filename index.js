@@ -3,14 +3,15 @@ const KeyDidResolver = require('key-did-resolver').default
 const { DID } = require('dids')
 const { IDX } =require('@ceramicstudio/idx')
 const {CeramicClient} = require('@ceramicnetwork/http-client')
-const { TileDocument } = require('@ceramicnetwork/stream-tile')
 const API_URL='https://ceramic-clay.3boxlabs.com'
+const solanaConnect=require('./solanaConnect')
+
 const aliases = {
-    alias1: 'Solana',
+    solana: 'Solana',
   }
 const ceramic = new CeramicClient(API_URL)
-
 const idx = new IDX({ ceramic, aliases })
+//Test Seed
 const seed = new Uint8Array([
     6, 190, 125, 152,  83,   9, 111, 202,
     6, 214, 218, 146, 104, 168, 166, 110,
@@ -23,8 +24,12 @@ const resolver = KeyDidResolver.getResolver()
 ceramic.did = new DID({ provider, resolver })
 await ceramic.did.authenticate()
 console.log(ceramic.did.id)
-
+solanaConnect.connectWallet()
+await idx.set('basicProfile', {
+  name: 'Account name',
+  description: solanaConnect.accountID,
+})
+console.log(await idx.get('basicProfile', 'did:key:z6Mkf64CtFAtmSnt2a3HrFyo1i1BzR2ftndjrHby1bqv8N5r'))
 }
-
 
 authenticate();

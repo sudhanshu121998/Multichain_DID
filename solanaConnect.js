@@ -1,10 +1,12 @@
 const solanaWeb3 = require("@solana/web3.js");
+let accountID;
 const establishConnection = async () => {
   rpcUrl = "https://api.devnet.solana.com";
   connection = new solanaWeb3.Connection(rpcUrl, "confirmed");
   console.log("Connection to cluster established:", rpcUrl);
 };
 const connectWallet = async () => {
+  establishConnection();
   let secretKey = Uint8Array.from([
     127, 225, 63, 104, 35, 51, 184, 116, 67, 31, 95, 164, 38, 3, 172, 97, 36,
     114, 226, 228, 239, 162, 29, 164, 134, 66, 183, 154, 20, 150, 132, 239, 247,
@@ -13,7 +15,10 @@ const connectWallet = async () => {
   ]);
   keypair = solanaWeb3.Keypair.fromSecretKey(secretKey);
   console.log("Connected to wallet");
+  accountID=keypair.publicKey.toString();
+  console.log(accountID);
+  
 };
-establishConnection();
-connectWallet();
-balance();
+module.exports={connectWallet,accountID};
+
+
